@@ -19,24 +19,13 @@
 
 /F {
   dup -90 mul rot add /rot exch def
-  dup 1 eq
-  {
-    rot cos R mul x add
-    rot sin R mul y add
-    R
-    90 rot add
-    180 rot add
-    arc stroke
-  }
-  {
-    rot cos R mul x add
-    rot sin R mul y add
-    R
-    rot 180 sub
-    rot 90 sub
-    arc stroke
-  }
-  ifelse
+
+  dup -45 mul 135 add rot add
+  rot cos R mul x add exch
+  rot sin R mul y add exch
+  R exch
+  dup 90 add
+  arc stroke
 
   dup 45 mul rot add cos A mul x add /x exch def
   dup 45 mul rot add sin A mul y add /y exch def
