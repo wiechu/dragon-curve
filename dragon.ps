@@ -1,0 +1,71 @@
+%!PS
+%%BoundingBox: 0 0 550 780
+
+% author: wiechu
+% description: *real* dragon curve
+
+/level 14 def
+
+/rot 0 def
+
+/R 2 def
+
+/x 350 def
+/y 175 def
+
+2 sqrt R mul /A exch def
+
+.1 setlinewidth
+
+/F {
+  dup -90 mul rot add /rot exch def
+  dup 1 eq
+  {
+    rot cos R mul x add
+    rot sin R mul y add
+    R
+    90 rot add
+    180 rot add
+    arc stroke
+  }
+  {
+    rot cos R mul x add
+    rot sin R mul y add
+    R
+    rot 180 sub
+    rot 90 sub
+    arc stroke
+  }
+  ifelse
+
+  dup 45 mul rot add cos A mul x add /x exch def
+  dup 45 mul rot add sin A mul y add /y exch def
+
+  pop
+} def
+
+/dragon {
+  dup 1 le
+  {
+    1 index F
+  }
+  {
+    dup 1 sub 1 exch dragon
+
+    1 index 1 dragon
+
+    dup 1 sub -1 exch dragon
+  }
+  ifelse
+  pop pop
+} def
+
+%
+% Let's rock
+%
+
+x y moveto
+newpath 1 level dragon
+
+showpage
+%%END
