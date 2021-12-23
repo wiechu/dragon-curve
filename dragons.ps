@@ -1,5 +1,5 @@
 %!PS
-%%BoundingBox: 0 0 700 700
+%%BoundingBox: 0 0 720 720
 
 % author: wiechu
 % description: *real* dragon curve
@@ -10,19 +10,12 @@
 
 /R 2 def
 
-/x0 350 def
-/y0 350 def
+/x0 360 def
+/y0 360 def
 
 2 sqrt R mul /A exch def
 
 .2 setlinewidth
-
-/start {
-  dup /rot exch def pop
-  dup /y exch def pop
-  dup /x exch def pop
-  x y moveto
-} def
 
 /F {
   dup -90 mul rot add /rot exch def
@@ -56,24 +49,28 @@
   pop pop
 } def
 
+/start {
+  rotation add /rot exch def
+  x0 R rot cos mul add /x exch def
+  y0 R rot sin mul add /y exch def
+  x y moveto
+  newpath 1 level dragon
+} def
+
 %
 % Let's rock
 %
 .8 0 0 setrgbcolor
-x0 y0 rotation start
-newpath 1 level dragon
-
-0 0.7 0 setrgbcolor
-x0 R sub y0 R sub 270 rotation add start
-newpath 1 level dragon
-
-0 0 .8 setrgbcolor
-x0 R sub R sub y0 180 rotation add start
-newpath 1 level dragon
+0 start
 
 0 0 0 setrgbcolor
-x0 R sub y0 R add 90 rotation add start
-newpath 1 level dragon
+90 start
+
+0 0 .8 setrgbcolor
+180 start
+
+0 0.7 0 setrgbcolor
+270 start
 
 showpage
 %%END
